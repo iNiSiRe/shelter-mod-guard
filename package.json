@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "netbus": "https://github.com/iNiSiRe/netbus.js",
+    "shelter-core": "https://github.com/iNiSiRe/shelter-core.js",
+    "node-telegram-bot-api": "^0.61.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^20.4.5",
+    "@types/node-telegram-bot-api": "^0.61.7"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
