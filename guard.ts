@@ -35,8 +35,6 @@ export class Guard
 
         if (magnet.open === true) {
             this.telegram.sendMessage(this.chatId, 'Magnet sensor "door-1" is opened');
-        } else {
-            this.telegram.sendMessage(this.chatId, 'Magnet sensor "door-1" is closed');
         }
     }
 
@@ -46,11 +44,15 @@ export class Guard
             return;
         }
 
-        if (!update.has('motionAt')) {
+        if (!update.has('motion')) {
             return;
         }
 
-        this.telegram.sendMessage(this.chatId, 'Motion detected on sensor "motion-1"');
+        const motion = update.get('motion');
+
+        if (motion.active === true) {
+            this.telegram.sendMessage(this.chatId, 'Motion detected on sensor "motion-1"');
+        }
     }
 
     private formatMemoryUsage = (data: number) => `${Math.round((data / 1024 / 1024) * 100) / 100} MB`;
@@ -126,6 +128,9 @@ export class Guard
             case 'status': {
                 const status = this.buildStatus();
                 this.telegram.answerCallbackQuery(callbackQuery.id, {text: status.text});
+
+                this.telegram.sendMessage(chatId, status.text, status.opts);
+
                 break;
             }
 
